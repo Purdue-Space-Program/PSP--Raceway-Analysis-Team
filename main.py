@@ -7,3 +7,5 @@
 #also run another if else for structural analysis conversion
 #generate the plots with html for all of the data
 #save to file
+import plt
+import np
