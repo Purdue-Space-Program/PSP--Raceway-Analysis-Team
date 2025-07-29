@@ -66,6 +66,7 @@ for i in range(n_elements):
     
     # Compute the equivalent nodal force vector for a constant distributed axial load
     fe = (f_horiz * dx / 2) * np.array([1, 1])  # Load is equally distributed to both nodes
+    # Note that N/m * m = N, so this gives an actual force vector (not just a load per unit length)
 
     # Add the element stiffness matrix to the appropriate 2x2 block in the global stiffness matrix
     K_stretch[i:i+2, i:i+2] += ke
