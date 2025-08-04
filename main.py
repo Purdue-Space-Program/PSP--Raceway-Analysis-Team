@@ -26,6 +26,8 @@ else:
   #another round of cea output that i cant understand for the love of god im so sorry for anyone trying to clean this up prayers to you
 
 #dimensions of the raceway will all of code around here
+import structural_analysis
+import thermal_analysis
 
 chanl_num = 0
 print ("Channel Number: ", chanl_num)
@@ -48,3 +50,4 @@ radius_new = r_arr[i + 1]
 #plot code if someone wants to add some that stuff
 
 #idk how to explain literally the last 200 lines of code SJNDFDFDFJNF
+
