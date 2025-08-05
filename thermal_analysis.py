@@ -1,6 +1,7 @@
 #For now we're assuming the setup is 1D (raceway has ~0 thickness)
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 
 #Returns temperature of the air based on altitude (in K)
 def getOutsideTemp(altitude):
@@ -60,15 +61,26 @@ Tt = 94 #Temp of Rocket Tank (in K)
 R_conv = 1/h*A_1  #Resistance between Te and T1 
 R_cond = (L_rt/(k_s*A_2) + L_r/(k_cf*A_1)) #Equivalent resistance between T1 and Tt (conduction region)
     
-#Defining a function to compute the air temperature at varying altitudes
+#Defining a function to compute the air temperature at varying altitudes (from https://www.grc.nasa.gov/www/k-12/airplane/atmosmet.html)
 def Alt2Temp(h):  #h (altitude) is in meters
-    Te_C = 15.04 - 0.00649*h #Temp in C
-    Te = Te_C + 273.15  #Kelvin Conversion
-    return Te
+    if h <= 11000: 
+        Te_C = 15.04 - 0.00649*h #Temp in C
+        Te_K = Te_C + 273.15  #Kelvin Conversion
+        return Te_K
+    if 11000 < h <= 25000:
+        Te_C = -56.46
+        Te_K = Te_C + 273.15
+        return Te_K
+    if h > 25000:
+        Te_C = -131.21 + 0.00299*h
+        Te_K = Te_C + 273.15
+        return Te_K
     
 #Defining main function to compute the raceway temperatures at a given altitude (only integers between 1 and 11001)
 def get_raceway_temps():
-    for i in range(1, 10):
+    data = []  #Storing values
+    
+    for i in range(1, 30001):
         Te = Alt2Temp(i)
         
 # Finding T1 (temperature at the side of the raceway hitting the air)
@@ -83,5 +95,17 @@ def get_raceway_temps():
 
         print("Outer Wall of Raceway:", T1, "Kelvin at altitude i=", i)
         print("Inner Wall of Raceway:", T2, "Kelvin at altitude i=", i)
+        
+        data.append({
+            "Altitude (m)": i,
+            "Outer Wall Temp (T1, K)": T1, 
+            "Inner Wall Temp (T2, K)": T2
+        })
+        
+    #Convert to dataframe
+    df = pd.DataFrame(data)
+        
+    #Export to excel
+    df.to_excel("raceway_temps.xlsx", index=False)
 
 get_raceway_temps()
