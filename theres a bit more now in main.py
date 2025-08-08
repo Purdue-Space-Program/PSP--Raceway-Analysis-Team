@@ -26,18 +26,21 @@ else:
   #another round of cea output that i cant understand for the love of god im so sorry for anyone trying to clean this up prayers to you
 
 #dimensions of the raceway will all of code around here
-import structural_analysis
-import thermal_analysis
+import structural_analysis.py
+import thermal_analysis.py
+import raceway_temps.xlsx
 
 chanl_num = 0
 print ("Channel Number: ", chanl_num)
-#surface_roughness = some data from strucutral analysis
-#print ("Surface Roughness:  " surface_roughness)
+#avgheight = horizontal displacement 
+#surface_roughness = avgheight, avg roughness, and maxheight
+print ("Surface Roughness:  " surface_roughness)
 #stuff thats hard to understand pt.2 :(
 
 #weird thing with non convergence function thing
 print("channels/stations did not converge")
 print ("Channel Number:  ", chanl_num)
+#lists/arrays in here idk how to interpert that with our own stuff
 
 i = 0
 radius_check = r_arr[i]
@@ -47,7 +50,11 @@ radius_new = r_arr[i + 1]
 
 #if boolean with stuff thats hard to understand pt. 3
 #axes and phases 
-#plot code if someone wants to add some that stuff
+phase_colors = {"liquid": "blue", "gas": "yellow", "super_crit_gas":, "red"}
 
+#plot code if someone wants to add some that stuff
+#^ anybody who has worked on plots i really do reccomend that yall work on this part specifically
+#make them for: heatmap, axial positions to ____ (ref the og code), nozzle contour, 
 #idk how to explain literally the last 200 lines of code SJNDFDFDFJNF
+
 
