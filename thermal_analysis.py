@@ -67,11 +67,11 @@ def Alt2Temp(h):  #h (altitude) is in meters
         Te_C = 15.04 - 0.00649*h #Temp in C
         Te_K = Te_C + 273.15  #Kelvin Conversion
         return Te_K
-    if 11000 < h <= 25000:
+    elif h <= 25000:
         Te_C = -56.46
         Te_K = Te_C + 273.15
         return Te_K
-    if h > 25000:
+    else:
         Te_C = -131.21 + 0.00299*h
         Te_K = Te_C + 273.15
         return Te_K
@@ -107,5 +107,7 @@ def get_raceway_temps():
         
     #Export to excel
     df.to_excel("raceway_temps.xlsx", index=False)
+
+    return df # Establish dataframe for main.py to use 
 
 get_raceway_temps()
